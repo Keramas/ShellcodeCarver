@@ -5,7 +5,9 @@ This python script is for carving out Matt Miller's 32 byte egghunter shellcode 
 <b>How to use:</b>
 
 -Modify the script by adding the bad characters you have discovered to the badChar list.
+
 -The egg is predefined as 'W00T' for the shellcode.
+
 -Modify the memory address where the decoding will begin in the genShellcode function.
 
 <b>Technique references:</b>
