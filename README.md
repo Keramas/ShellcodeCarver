@@ -9,6 +9,7 @@ This python script is for carving out Matt Miller's 32 byte egghunter shellcode 
 -Modify the memory address where the decoding will begin in the genShellcode function.
 
 <b>Technique references:</b>
+
 NNM Zero-day by Muts:
 https://www.youtube.com/watch?v=gHISpAZiAm0
 
