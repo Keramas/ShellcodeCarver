@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 ######################################################################################
-# Manul encoding script for carving 32 byte Matt Miller egghunter shellcode into EAX #
+# Manual encoding script for carving 32 byte Matt Miller egghunter shellcode into EAX#
 # Egg = 'W00T'                                                                       #
 # Non-encoded shellcode:                                                             #
 # \x66\x81\xca\xff\x0f\x42\x52\x6a                                                   #
