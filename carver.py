@@ -8,6 +8,8 @@
 # \x02\x58\xcd\x2e\x3c\x05\x5a\x74                                                   #
 # \xef\xb8\x54\x30\x30\x57\x8b\xfa                                                   #
 # \xaf\x75\xea\xaf\x75\xe7\xff\xe7                                                   #
+#                                                                                    #                                          
+#Script by Devin Casadey AKA Keramas                                                 #     
 ######################################################################################
 
 import sys
