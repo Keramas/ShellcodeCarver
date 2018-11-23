@@ -1,21 +1,57 @@
-# EgghunterShellcodeCarver
+<h1><b>Shellcode Carver Script</b></h1>
 
-This python script is for carving out Matt Miller's 32 byte egghunter shellcode into the EAX register in situations when standard encoding methods are not possible due to the amount of severely restricted characters.
+This python script is for carving out shellcode into the EAX register in situations when standard encoding methods are not possible due to the bad characters.
+
+<b>Usage Instructions:</b>
+
+1. Verify bad characters that cannot be used and add them to the "badChar" list in the Python script
+
+Example: 
+
+badChar=[0x00, 0x0a, 0x0d]
+
+2. Define the target values based on shellcode you wish to encode. 
+
+How to do this:
+
+A full explanation on the encoding process has been written by Vellosec [1].
+https://vellosec.net/2018/08/carving-shellcode-using-restrictive-character-sets/
+
+The target address is the result of the following equation:
+
+0xFFFFFFFF - [4 byte shellcode] + 1 = Target address
+
+Example using 4 bytes from Matt Miller's Egghunter shellcode (\xe7\xff\xe7\x75):
+FFFFFFFF - E7FFE775 + 1 = 1800188B
+
+Add or remove sets as needed depending on your shellcode
 
 
-<b>How to use:</b>
+3. Find out your current ESP location and the address where you want the decoding to take place
 
--Modify the script by adding the bad characters you have discovered to the badChar list.
+In the location where you will be placing this shellcode, first place the following ASM instructions:
 
--The egg is predefined as 'W00T' for the shellcode.
+PUSH ESP
+POP EAX
 
--Input the current ESP value and target decoding addresses to encode that address.
+Step through the code and note what the ESP address is after the POP EAX instruction. This is the "current ESP address". 
+When running the script, input this value when asked, followed by the value of the address you wish to decode.
 
 
-<b>Technique references:</b>
+4. Modify the genShellcode() function for your shellcode below "Begin actual shellcode encoding:" by call the encoding functions as needed for your target addresses.
 
-NNM Zero-day by Muts:
+Four different functions:
+
+encodeNorm(set#) - Use when no null bytes present in target address
+encodeNullFirst(set#) - Use when first byte of target is a null byte
+encodeNullSecond(set#) - Use when second byte of target is a null byte
+encodeNullThird(sec3) - Use when third byte of target is a null byte
+
+
+References:
+[1]Vellosec - CARVING SHELLCODE USING RESTRICTIVE CHARACTER SETS 
+https://vellosec.net/2018/08/carving-shellcode-using-restrictive-character-sets/
+
+[2]NNM Zero-day by Muts
 https://www.youtube.com/watch?v=gHISpAZiAm0
 
-Very nice explanation:
-https://vellosec.net/2018/08/carving-shellcode-using-restrictive-character-sets/
