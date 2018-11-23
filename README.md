@@ -8,9 +8,9 @@ This python script is for carving out shellcode into the EAX register in situati
 
 Example:
 
-`
+```
 badChar=[0x00, 0x0a, 0x0d]
-`
+```
 
 
 ### 2. Define the target values based on shellcode you wish to encode. 
@@ -21,12 +21,14 @@ A full explanation on the encoding process has been written by Vellosec [1].
 
 The target address is the result of the following equation:
 
+```
 0xFFFFFFFF - [4 byte shellcode] + 1 = Target address
-
+```
 
 Example using 4 bytes from Matt Miller's Egghunter shellcode (\xe7\xff\xe7\x75):
+```
 FFFFFFFF - E7FFE775 + 1 = 1800188B
-
+```
 
 Add or remove sets as needed depending on your shellcode
 
@@ -38,7 +40,6 @@ In the location where you will be placing this shellcode, first place the follow
 
 ```
 PUSH ESP
-
 POP EAX
 ```
 
@@ -59,11 +60,9 @@ Four different functions:
 
 ## References:
 - [1]Vellosec - CARVING SHELLCODE USING RESTRICTIVE CHARACTER SETS
-
-https://vellosec.net/2018/08/carving-shellcode-using-restrictive-character-sets/
+    - https://vellosec.net/2018/08/carving-shellcode-using-restrictive-character-sets/
 
 
 - [2]NNM Zero-day by Muts
-
-https://www.youtube.com/watch?v=gHISpAZiAm0
+    - https://www.youtube.com/watch?v=gHISpAZiAm0
 
