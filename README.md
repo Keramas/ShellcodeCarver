@@ -36,11 +36,11 @@ Add or remove sets as needed depending on your shellcode
 
 In the location where you will be placing this shellcode, first place the following ASM instructions:
 
-`
+```
 PUSH ESP
 
 POP EAX
-`
+```
 
 Step through the code and note what the ESP address is after the POP EAX instruction. This is the "current ESP address". 
 When running the script, input this value when asked, followed by the value of the address you wish to decode.
