@@ -1,21 +1,21 @@
-<h1><b>Shellcode Carver Script</b></h1>
+#Shellcode Carver Script
 
 This python script is for carving out shellcode into the EAX register in situations when standard encoding methods are not possible due to the bad characters.
 
-<b>Usage Instructions:</b>
+**Usage Instructions:**
 
 1. Verify bad characters that cannot be used and add them to the "badChar" list in the Python script
 
 Example: 
-
+`
 badChar=[0x00, 0x0a, 0x0d]
+`
 
 2. Define the target values based on shellcode you wish to encode. 
 
 How to do this:
 
 A full explanation on the encoding process has been written by Vellosec [1].
-https://vellosec.net/2018/08/carving-shellcode-using-restrictive-character-sets/
 
 The target address is the result of the following equation:
 
