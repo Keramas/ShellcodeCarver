@@ -59,10 +59,10 @@ Four different functions:
 
 
 ## References:
-- [1]Vellosec - CARVING SHELLCODE USING RESTRICTIVE CHARACTER SETS
+- [1] Vellosec - CARVING SHELLCODE USING RESTRICTIVE CHARACTER SETS
     - https://vellosec.net/2018/08/carving-shellcode-using-restrictive-character-sets/
 
 
-- [2]NNM Zero-day by Muts
+- [2] NNM Zero-day by Muts
     - https://www.youtube.com/watch?v=gHISpAZiAm0
 
