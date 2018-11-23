@@ -21,8 +21,10 @@ The target address is the result of the following equation:
 
 0xFFFFFFFF - [4 byte shellcode] + 1 = Target address
 
+
 Example using 4 bytes from Matt Miller's Egghunter shellcode (\xe7\xff\xe7\x75):
 FFFFFFFF - E7FFE775 + 1 = 1800188B
+
 
 Add or remove sets as needed depending on your shellcode
 
@@ -31,8 +33,10 @@ Add or remove sets as needed depending on your shellcode
 
 In the location where you will be placing this shellcode, first place the following ASM instructions:
 
+`
 PUSH ESP
 POP EAX
+`
 
 Step through the code and note what the ESP address is after the POP EAX instruction. This is the "current ESP address". 
 When running the script, input this value when asked, followed by the value of the address you wish to decode.
@@ -45,7 +49,7 @@ Four different functions:
 - encodeNorm(set#) - Use when no null bytes present in target address
 - encodeNullFirst(set#) - Use when first byte of target is a null byte
 - encodeNullSecond(set#) - Use when second byte of target is a null byte
-- encodeNullThird(sec3) - Use when third byte of target is a null byte
+- encodeNullThird(set#) - Use when third byte of target is a null byte
 
 
 ## References:
