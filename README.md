@@ -1,8 +1,8 @@
-#Shellcode Carver Script
+# Shellcode Carver Script
 
 This python script is for carving out shellcode into the EAX register in situations when standard encoding methods are not possible due to the bad characters.
 
-**Usage Instructions:**
+## Usage Instructions
 
 1. Verify bad characters that cannot be used and add them to the "badChar" list in the Python script
 
@@ -42,16 +42,16 @@ When running the script, input this value when asked, followed by the value of t
 
 Four different functions:
 
-encodeNorm(set#) - Use when no null bytes present in target address
-encodeNullFirst(set#) - Use when first byte of target is a null byte
-encodeNullSecond(set#) - Use when second byte of target is a null byte
-encodeNullThird(sec3) - Use when third byte of target is a null byte
+- encodeNorm(set#) - Use when no null bytes present in target address
+- encodeNullFirst(set#) - Use when first byte of target is a null byte
+- encodeNullSecond(set#) - Use when second byte of target is a null byte
+- encodeNullThird(sec3) - Use when third byte of target is a null byte
 
 
-References:
-[1]Vellosec - CARVING SHELLCODE USING RESTRICTIVE CHARACTER SETS 
+## References:
+- [1]Vellosec - CARVING SHELLCODE USING RESTRICTIVE CHARACTER SETS 
 https://vellosec.net/2018/08/carving-shellcode-using-restrictive-character-sets/
 
-[2]NNM Zero-day by Muts
+- [2]NNM Zero-day by Muts
 https://www.youtube.com/watch?v=gHISpAZiAm0
 
